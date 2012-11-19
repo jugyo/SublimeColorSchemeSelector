@@ -1,7 +1,7 @@
 ThemeSelector
 ========
 
-Sublime Text 2 Plugin to select theme quickly.
+Sublime Text 2 Plugin to select theme quickly via the Quick Panel.
 
 ## Installation
 
