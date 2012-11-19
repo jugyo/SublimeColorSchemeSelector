@@ -1,6 +1,6 @@
 [
   {
-    "caption": "ThemeSelector: select_theme",
+    "caption": "ThemeSelector: Select Theme",
     "command": "select_theme"
   }
 ]
