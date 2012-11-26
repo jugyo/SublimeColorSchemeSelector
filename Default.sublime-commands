@@ -1,6 +1,6 @@
 [
   {
-    "caption": "ThemeSelector: Select Theme",
-    "command": "select_theme"
+    "caption": "ColorSchemeSelector: Select Color Scheme",
+    "command": "select_color_scheme"
   }
 ]
