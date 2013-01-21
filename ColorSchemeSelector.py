@@ -1,5 +1,6 @@
 import sublime, sublime_plugin
 import os
+from glob import iglob
 
 class SelectColorSchemeCommand(sublime_plugin.WindowCommand):
     def run(self):
@@ -7,22 +8,23 @@ class SelectColorSchemeCommand(sublime_plugin.WindowCommand):
 
         def on_done(index):
             if index >= 0:
-                self.set_color_scheme(color_schemes[index])
+                self.set_color_scheme(color_schemes[index][1])
 
         self.window.show_quick_panel(color_schemes, on_done)
 
+    # [[name, path]...]
     def get_color_schemes(self):
-        current_color_scheme = self.load_settings().get('color_scheme')
-        files = filter(lambda f: f.endswith('tmTheme'), os.listdir(self.color_scheme_dir()))
-        return files
+        pattern = os.path.join(sublime.packages_path(), '*', '*.tmTheme')
+        color_schemes = []
+        for filepath in iglob(pattern):
+            name = os.path.basename(filepath)
+            path = filepath.replace(sublime.packages_path(), 'Packages')
+            color_schemes.append([name, path])
+        return color_schemes
 
-    def set_color_scheme(self, color_scheme):
-        color_scheme_file = os.path.join(self.color_scheme_dir(), color_scheme)
-        self.load_settings().set('color_scheme', color_scheme_file)
+    def set_color_scheme(self, color_scheme_path):
+        self.load_settings().set('color_scheme', color_scheme_path)
         sublime.save_settings('Preferences.sublime-settings')
-
-    def color_scheme_dir(self):
-        return os.path.join(sublime.packages_path(), "Color Scheme - Default")
 
     def load_settings(self):
         return sublime.load_settings('Preferences.sublime-settings')
