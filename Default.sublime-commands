@@ -2,5 +2,20 @@
   {
     "caption": "ColorSchemeSelector: Select Color Scheme",
     "command": "select_color_scheme"
-  }
+  },
+  {
+		"caption": "ColorSchemeSelector: Random Color Scheme",
+		"command": "select_color_scheme",
+		"args": {"random": true}
+	},
+	{
+		"caption": "ColorSchemeSelector: Previous Color Scheme",
+		"command": "select_color_scheme",
+		"args": {"direction": "previous"}
+	},
+	{
+		"caption": "ColorSchemeSelector: Next Color Scheme",
+		"command": "select_color_scheme",
+		"args": {"direction": "next"}
+	}
 ]
