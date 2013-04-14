@@ -11,9 +11,9 @@ class SelectColorSchemeCommand(sublime_plugin.WindowCommand):
             if index >= 0:
                 self.set_color_scheme(color_schemes[index][1])
         
-        if kwargs.has_key('random'):
+        if 'random' in kwargs:
             self.set_color_scheme(choice(color_schemes)[1])
-        elif kwargs.has_key('direction'):
+        elif 'random' in kwargs:
             self.move_color_scheme(kwargs['direction'], color_schemes)
         else:
             self.window.show_quick_panel(color_schemes, on_done)
@@ -31,12 +31,14 @@ class SelectColorSchemeCommand(sublime_plugin.WindowCommand):
 
     # [[name, path]...]
     def get_color_schemes(self):
-        pattern = os.path.join(sublime.packages_path(), '*', '*.tmTheme')
         color_schemes = []
-        for filepath in iglob(pattern):
-            name = os.path.basename(filepath)
-            path = filepath.replace(sublime.packages_path(), 'Packages')
-            color_schemes.append([name, path])
+        for root, dirs, files in os.walk(sublime.packages_path()):
+            for fl in files:
+                if fl.endswith('.tmTheme'):
+                    name = os.path.basename(fl).replace('.tmTheme', '')
+                    filepath = os.path.join(root, fl)
+                    path = filepath.replace(sublime.packages_path(), 'Packages')
+                    color_schemes.append([name, path])
         return color_schemes
 
     def set_color_scheme(self, color_scheme_path):
