@@ -1,12 +1,13 @@
 ColorSchemeSelector
 ========
 
-Sublime Text 2 Plugin to select Color Scheme quickly via the Quick Panel.
+Sublime Text Plugin to select Color Scheme quickly via the Quick Panel.
+Unfortunately this only support default color schemes.
 
 ## Installation
 
 ```
-$ cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages
+$ cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages
 $ git clone https://github.com/jugyo/SublimeColorSchemeSelector.git ColorSchemeSelector
 ```
 
