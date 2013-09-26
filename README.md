@@ -4,6 +4,8 @@ ColorSchemeSelector
 Sublime Text Plugin to select Color Scheme quickly via the Quick Panel.
 Unfortunately this only support default color schemes.
 
+![screencast](http://i.imgur.com/Z5hvqzO.gif)
+
 ## Installation
 
 ```
