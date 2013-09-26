@@ -39,23 +39,26 @@ class SelectColorSchemeCommand(sublime_plugin.WindowCommand):
         if 'random' in kwargs:
             self.set_color_scheme(self.path_to_color_scheme(choice(color_schemes)))
         elif 'direction' in kwargs:
-            self.move_color_scheme(kwargs['direction'], color_schemes)
+            self.move_color_scheme(kwargs['direction'])
         else:
-            self.window.show_quick_panel(color_schemes, on_done)
+            self.window.show_quick_panel(color_schemes, on_done, 0, self.current_scheme_index(), on_done)
 
     def path_to_color_scheme(self, name):
         return "Packages/Color Scheme - Default/%s.tmTheme" % name
 
-    def move_color_scheme(self, direction, color_schemes):
-        current_scheme = self.load_settings().get('color_scheme')
-        current_index = [self.path_to_color_scheme(c) for c in color_schemes].index(current_scheme)
+    def move_color_scheme(self, direction):
+        current_index = self.current_scheme_index()
         if direction == 'previous':
             index = current_index - 1
         elif direction == 'next':
-            index = current_index + 1 if current_index < len(color_schemes) else 0
+            index = current_index + 1 if current_index < len(self.DEFUALT_COLOR_SCHEMES) else 0
         else:
             raise ValueError
-        self.set_color_scheme(self.path_to_color_scheme(color_schemes[index]))
+        self.set_color_scheme(self.path_to_color_scheme(self.DEFUALT_COLOR_SCHEMES[index]))
+
+    def current_scheme_index(self):
+        current_scheme = self.load_settings().get('color_scheme')
+        return [self.path_to_color_scheme(c) for c in self.DEFUALT_COLOR_SCHEMES].index(current_scheme)
 
     def set_color_scheme(self, color_scheme_path):
         self.load_settings().set('color_scheme', color_scheme_path)
