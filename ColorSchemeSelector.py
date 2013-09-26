@@ -41,7 +41,10 @@ class SelectColorSchemeCommand(sublime_plugin.WindowCommand):
         elif 'direction' in kwargs:
             self.move_color_scheme(kwargs['direction'])
         else:
-            self.window.show_quick_panel(color_schemes, on_done, 0, self.current_scheme_index(), on_done)
+            if int(sublime.version()) > 3000:
+                self.window.show_quick_panel(color_schemes, on_done, 0, self.current_scheme_index(), on_done)
+            else:
+                self.window.show_quick_panel(color_schemes, on_done, 0, self.current_scheme_index())
 
     def path_to_color_scheme(self, name):
         return "Packages/Color Scheme - Default/%s.tmTheme" % name
