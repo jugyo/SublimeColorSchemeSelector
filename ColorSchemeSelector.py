@@ -22,9 +22,6 @@ class SelectColorSchemeCommand(sublime_plugin.WindowCommand):
             else:
                 self.window.show_quick_panel(items, on_done, 0, self.current_scheme_index(color_schemes))
 
-    def path_to_color_scheme(self, name):
-        return "Packages/Color Scheme - Default/%s.tmTheme" % name
-
     def move_color_scheme(self, color_schemes, direction):
         current_index = self.current_scheme_index(color_schemes)
         if direction == 'previous':
