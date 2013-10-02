@@ -5,7 +5,33 @@ from random import choice
 
 class SelectColorSchemeCommand(sublime_plugin.WindowCommand):
     def run(self, **kwargs):
-        color_schemes = sublime.find_resources("*.tmTheme")
+        if int(sublime.version()) > 3000:
+            color_schemes = sublime.find_resources("*.tmTheme")
+        else:
+            color_schemes = [
+                "All Hallow's Eve",
+                "Amy",
+                "Blackboard",
+                "Cobalt",
+                "Dawn",
+                "Eiffel",
+                "Espresso Libre",
+                "IDLE",
+                "LAZY",
+                "Mac Classic",
+                "MagicWB (Amiga)",
+                "Monokai Bright",
+                "Monokai",
+                "Pastels on Dark",
+                "Slush & Poppies",
+                "Solarized (Dark)",
+                "Solarized (Light)",
+                "SpaceCadet",
+                "Sunburst",
+                "Twilight",
+                "Zenburnesque",
+                "iPlastic"
+            ]
 
         def on_done(index):
             if index >= 0:
