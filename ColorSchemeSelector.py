@@ -33,9 +33,13 @@ class SelectColorSchemeCommand(sublime_plugin.WindowCommand):
                 "iPlastic"
             ]
 
+        current_scheme_index = self.current_scheme_index(color_schemes)
+
         def on_done(index):
             if index >= 0:
                 self.set_color_scheme(color_schemes[index])
+            else:
+                self.set_color_scheme(color_schemes[current_scheme_index])
 
         if 'random' in kwargs:
             self.set_color_scheme(choice(color_schemes))
@@ -44,9 +48,9 @@ class SelectColorSchemeCommand(sublime_plugin.WindowCommand):
         else:
             items = [[os.path.basename(_), _] for _ in color_schemes]
             if int(sublime.version()) > 3000:
-                self.window.show_quick_panel(items, on_done, 0, self.current_scheme_index(color_schemes), on_done)
+                self.window.show_quick_panel(items, on_done, 0, current_scheme_index, on_done)
             else:
-                self.window.show_quick_panel(items, on_done, 0, self.current_scheme_index(color_schemes))
+                self.window.show_quick_panel(items, on_done, 0, current_scheme_index)
 
     def move_color_scheme(self, color_schemes, direction):
         current_index = self.current_scheme_index(color_schemes)
